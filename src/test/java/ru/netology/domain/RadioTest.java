@@ -1,6 +1,6 @@
 package ru.netology.domain;
 
-import org.junit.jupiter.api.Disabled;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,112 +9,116 @@ class RadioTest {
     Radio radio = new Radio();
 
     @Test
-    public void shouldSwitchStationDown() {
-        radio.setMaxStation(0);
-        radio.setMaxStation(1);
-        radio.setMaxStation(2);
-        radio.setMaxStation(3);
-        radio.setMaxStation(4);
-        radio.setMaxStation(5);
-        radio.setMaxStation(6);
-        radio.setMaxStation(7);
-        radio.setMaxStation(8);
-        radio.setMaxStation(9);
-        assertEquals(0, radio.getMaxStation());
+    public void shouldIncreaseStation() {
+        radio.increaseCurrentStation();
+        int actual = radio.getCurrentStation();
+        assertEquals(6, actual);
     }
 
     @Test
-    public void shouldSwitchStationUp() {
-        radio.setMinStation(9);
-        radio.setMinStation(8);
-        radio.setMinStation(7);
-        radio.setMinStation(6);
-        radio.setMinStation(5);
-        radio.setMinStation(4);
-        radio.setMinStation(3);
-        radio.setMinStation(2);
-        radio.setMinStation(1);
-        radio.setMinStation(0);
-        assertEquals(9, radio.getMinStation());
+    public void shouldDecreaseStation() {
+        radio.decreaseCurrentStation();
+        int actual = radio.getCurrentStation();
+        assertEquals(4, actual);
     }
 
     @Test
-    public void shouldSwitchStation() {
+    public void shouldIncreaseStationToMax() {
+        radio.increaseCurrentStation(); // 5~6
+        radio.increaseCurrentStation(); // 6~7
+        radio.increaseCurrentStation(); // 7~8
+        radio.increaseCurrentStation(); // 8~9
+        radio.increaseCurrentStation(); // 9~9
 
-        radio.setCurrentStation(6);
-        assertEquals(6, radio.getCurrentStation());
+
+        int actual = radio.getCurrentStation();
+        assertEquals(9, actual);
+    }
+
+    @Test
+    public void shouldDecreaseStationToMin() {
+        radio.decreaseCurrentStation(); // 5~4
+        radio.decreaseCurrentStation(); // 4~3
+        radio.decreaseCurrentStation(); // 3~2
+        radio.decreaseCurrentStation(); // 2~1
+        radio.decreaseCurrentStation(); // 1~0
+        radio.decreaseCurrentStation(); // 0~0
+
+
+        int actual = radio.getCurrentStation();
+        assertEquals(0, actual);
+    }
+
+    /* Негативные тесты */
+
+    @Test
+    public void shouldRetrieveCurrentValue() {
+        radio.setCurrentStation(10);
+        assertEquals(5, radio.getCurrentStation());
+    }
+
+    @Test
+    public void shouldRetrieveCurrentValue2() {
+        radio.setCurrentStation(-1);
+        assertEquals(5, radio.getCurrentStation());
+    }
+
+
+    @Test
+    public void shouldIncreaseVolume() {
+        radio.increaseCurrentVolume();
+        int actual = radio.getCurrentVolume();
+        assertEquals(6, actual);
     }
 
     @Test
     public void shouldDecreaseVolume() {
-        radio.setMinVolume(10);
-        radio.setMinVolume(9);
-        radio.setMinVolume(8);
-        radio.setMinVolume(7);
-        radio.setMinVolume(6);
-        radio.setMinVolume(5);
-        radio.setMinVolume(4);
-        radio.setMinVolume(3);
-        radio.setMinVolume(2);
-        radio.setMinVolume(1);
-        radio.setMinVolume(0);
-        radio.setMinVolume(0);
-        assertEquals(10, radio.getMinVolume());
+        radio.decreaseCurrentVolume();
+        int actual = radio.getCurrentVolume();
+        assertEquals(4, actual);
     }
 
     @Test
-    public void shouldIncreaseVolume() {
-        radio.setMaxVolume(0);
-        radio.setMaxVolume(1);
-        radio.setMaxVolume(2);
-        radio.setMaxVolume(3);
-        radio.setMaxVolume(4);
-        radio.setMaxVolume(5);
-        radio.setMaxVolume(6);
-        radio.setMaxVolume(7);
-        radio.setMaxVolume(8);
-        radio.setMaxVolume(9);
-        radio.setMaxVolume(10);
-        radio.setMaxVolume(10);
-        assertEquals(0, radio.getMaxVolume());
+    public void shouldIncreaseVolumeToMax() {
+        radio.increaseCurrentVolume(); // 5~6
+        radio.increaseCurrentVolume(); // 7-8
+        radio.increaseCurrentVolume(); // 8-9
+        radio.increaseCurrentVolume(); // 9-10
+        radio.increaseCurrentVolume(); // 10-10
+
+
+        int actual = radio.getCurrentVolume();
+        assertEquals(10, actual);
     }
 
     @Test
-    public void shouldChangeStationOverMaximum() {
-        radio.setCurrentStation(10);
-        assertEquals(9, radio.getMinStation());
+    public void shouldDecreaseVolumeToMin() {
+        radio.decreaseCurrentVolume(); // 5~4
+        radio.decreaseCurrentVolume(); // 4~3
+        radio.decreaseCurrentVolume(); // 3~2
+        radio.decreaseCurrentVolume(); // 2~1
+        radio.decreaseCurrentVolume(); // 1~0
+        radio.decreaseCurrentVolume(); // 0~0
+
+
+        int actual = radio.getCurrentVolume();
+        assertEquals(0, actual);
+    }
+
+    /* Негативные тесты */
+
+    @Test
+    public void shouldRetrieveCurrentVolumeValue() {
+        radio.setCurrentVolume(11);
+        assertEquals(5, radio.getCurrentVolume());
     }
 
     @Test
-    public void shouldChangeStationUnderMinimum() {
-        radio.setCurrentStation(-1);
-        assertEquals(0, radio.getMaxStation());
+    public void shouldRetrieveCurrentVolumeValue2() {
+        radio.setCurrentVolume(-1);
+        assertEquals(5, radio.getCurrentVolume());
     }
 
-    @Test
-    public void shouldChangeVolumeOverMaximum() {
-        radio.setCurrentVolume(15);
-        assertEquals(10, radio.getMinVolume());
-
-    }
-
-    @Test
-    public void shouldChangeVolumeUnderMinimum() {
-        radio.setCurrentStation(-1);
-        assertEquals(0, radio.getMaxVolume());
-    }
-
-    @Test
-    public void shouldWork() {
-        radio.setOn(true);
-        assertEquals(true, radio.isOn());
-    }
-
-    @Test
-    public void shouldntWork() {
-        radio.setOn(false);
-        assertEquals(true, radio.isOn());
-    }
 
 }
 
