@@ -29,10 +29,10 @@ class RadioTest {
         radio.increaseCurrentStation(); // 7~8
         radio.increaseCurrentStation(); // 8~9
         radio.increaseCurrentStation(); // 9~9
-
+        radio.increaseCurrentStation(); // 5~6
 
         int actual = radio.getCurrentStation();
-        assertEquals(9, actual);
+        assertEquals(6, actual);
     }
 
     @Test
@@ -43,10 +43,10 @@ class RadioTest {
         radio.decreaseCurrentStation(); // 2~1
         radio.decreaseCurrentStation(); // 1~0
         radio.decreaseCurrentStation(); // 0~0
-
+        radio.decreaseCurrentStation(); // 5~4
 
         int actual = radio.getCurrentStation();
-        assertEquals(0, actual);
+        assertEquals(4, actual);
     }
 
     /* Негативные тесты */
@@ -81,9 +81,11 @@ class RadioTest {
     @Test
     public void shouldIncreaseVolumeToMax() {
         radio.increaseCurrentVolume(); // 5~6
+        radio.increaseCurrentVolume(); // 6-7
         radio.increaseCurrentVolume(); // 7-8
         radio.increaseCurrentVolume(); // 8-9
         radio.increaseCurrentVolume(); // 9-10
+        radio.increaseCurrentVolume(); // 10-10
         radio.increaseCurrentVolume(); // 10-10
 
 
@@ -99,7 +101,7 @@ class RadioTest {
         radio.decreaseCurrentVolume(); // 2~1
         radio.decreaseCurrentVolume(); // 1~0
         radio.decreaseCurrentVolume(); // 0~0
-
+        radio.decreaseCurrentVolume(); // 0~0
 
         int actual = radio.getCurrentVolume();
         assertEquals(0, actual);

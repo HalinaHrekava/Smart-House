@@ -12,6 +12,7 @@ public class Radio {
 
     public void increaseCurrentStation() {
         if (currentStation == maxStation) {
+            setCurrentStation(5);
             return;
         }
         setCurrentStation(currentStation + 1);
@@ -19,6 +20,7 @@ public class Radio {
 
     public void decreaseCurrentStation() {
         if (currentStation == minStation) {
+            setCurrentStation(5);
             return;
         }
         setCurrentStation(currentStation - 1);
