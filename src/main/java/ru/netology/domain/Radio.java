@@ -4,26 +4,27 @@ public class Radio {
 
     private int maxStation = 9;
     private int minStation = 0;
-    private int currentStation = 5;
+    private int currentStation;
     private int maxVolume = 10;
     private int minVolume = 0;
     private int currentVolume = 5;
 
 
     public void increaseCurrentStation() {
-        if (currentStation == maxStation) {
-            setCurrentStation(5);
+        if (currentStation >= maxStation) {
+            setCurrentStation(minStation);
             return;
         }
         setCurrentStation(currentStation + 1);
     }
 
     public void decreaseCurrentStation() {
-        if (currentStation == minStation) {
-            setCurrentStation(5);
+        if (currentStation <= minStation) {
+            setCurrentStation(maxStation);
             return;
+        } else {
+            setCurrentStation(currentStation - 1);
         }
-        setCurrentStation(currentStation - 1);
 
     }
 

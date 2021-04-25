@@ -12,41 +12,48 @@ class RadioTest {
     public void shouldIncreaseStation() {
         radio.increaseCurrentStation();
         int actual = radio.getCurrentStation();
-        assertEquals(6, actual);
+        assertEquals(1, actual);
     }
 
     @Test
     public void shouldDecreaseStation() {
         radio.decreaseCurrentStation();
         int actual = radio.getCurrentStation();
-        assertEquals(4, actual);
+        assertEquals(9, actual);
     }
 
     @Test
     public void shouldIncreaseStationToMax() {
-        radio.increaseCurrentStation(); // 5~6
-        radio.increaseCurrentStation(); // 6~7
-        radio.increaseCurrentStation(); // 7~8
-        radio.increaseCurrentStation(); // 8~9
-        radio.increaseCurrentStation(); // 9~9
-        radio.increaseCurrentStation(); // 5~6
+        radio.increaseCurrentStation(); // 0
+        radio.increaseCurrentStation(); // 1
+        radio.increaseCurrentStation(); // 2
+        radio.increaseCurrentStation(); // 3
+        radio.increaseCurrentStation(); // 4
+        radio.increaseCurrentStation(); // 5
+        radio.increaseCurrentStation(); // 6
+        radio.increaseCurrentStation(); // 7
+        radio.increaseCurrentStation(); // 8
+        radio.increaseCurrentStation(); // 9
 
         int actual = radio.getCurrentStation();
-        assertEquals(6, actual);
+        assertEquals(0, actual);
     }
 
     @Test
     public void shouldDecreaseStationToMin() {
-        radio.decreaseCurrentStation(); // 5~4
-        radio.decreaseCurrentStation(); // 4~3
-        radio.decreaseCurrentStation(); // 3~2
-        radio.decreaseCurrentStation(); // 2~1
-        radio.decreaseCurrentStation(); // 1~0
-        radio.decreaseCurrentStation(); // 0~0
-        radio.decreaseCurrentStation(); // 5~4
+        radio.decreaseCurrentStation(); // 0
+        radio.decreaseCurrentStation(); // 9
+        radio.decreaseCurrentStation(); // 8
+        radio.decreaseCurrentStation(); // 7
+        radio.decreaseCurrentStation(); // 6
+        radio.decreaseCurrentStation(); // 5
+        radio.decreaseCurrentStation(); // 4
+        radio.decreaseCurrentStation(); // 3
+        radio.decreaseCurrentStation(); // 2
+        radio.decreaseCurrentStation(); // 1
 
         int actual = radio.getCurrentStation();
-        assertEquals(4, actual);
+        assertEquals(0, actual);
     }
 
     /* Негативные тесты */
@@ -54,13 +61,13 @@ class RadioTest {
     @Test
     public void shouldRetrieveCurrentValue() {
         radio.setCurrentStation(10);
-        assertEquals(5, radio.getCurrentStation());
+        assertEquals(0, radio.getCurrentStation());
     }
 
     @Test
     public void shouldRetrieveCurrentValue2() {
         radio.setCurrentStation(-1);
-        assertEquals(5, radio.getCurrentStation());
+        assertEquals(0, radio.getCurrentStation());
     }
 
 
